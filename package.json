@@ -1,0 +1,23 @@
+{
+  "name": "@lcdkhoa/object-handler",
+  "version": "1.0.1",
+  "description": "Convert complex nested data structures into flat formats and vice versa, to enhance simplicity and efficiency in data management.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "keywords": [
+    "#nested-to-flat",
+    "#flat-to-nested"
+  ],
+  "author": "lcdkhoa",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.14.11",
+    "typescript": "^5.5.3"
+  }
+}
