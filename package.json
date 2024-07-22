@@ -15,7 +15,7 @@
     "#flat-to-nested"
   ],
   "author": "lcdkhoa",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.14.11",
     "typescript": "^5.5.3"
