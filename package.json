@@ -1,6 +1,6 @@
 {
   "name": "@lcdkhoa/object-handler",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Convert complex nested data structures into flat formats and vice versa, to enhance simplicity and efficiency in data management.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
