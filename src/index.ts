@@ -1,17 +1,4 @@
-interface FlattenObjectsProps {
-  table: object;
-  splitKey: string;
-}
-
-interface UnFlatObjectsProps {
-  json: Record<string, unknown>;
-  keySplit: string;
-}
-
-const FlattenObjects = ({
-  table,
-  splitKey = '_',
-}: FlattenObjectsProps): Record<string, unknown> => {
+const FlattenObjects = (table: object, splitKey: string = '_'): Record<string, unknown> => {
   const reduce = (
     path: string,
     accumulator: Record<string, unknown>,
@@ -25,17 +12,12 @@ const FlattenObjects = ({
 
         while (index < length) {
           const property = `${path}[${index}]`;
-          const item = table[index] as unknown;
+          const item = table[index] as object;
           index += 1;
-          if (Object(item) !== item) {
-            accumulator[property] = item;
-          } else {
-            reduce(property, accumulator, item as object);
-          }
+          if (Object(item) !== item) accumulator[property] = item;
+          else reduce(property, accumulator, item);
         }
-      } else {
-        accumulator[path] = table;
-      }
+      } else accumulator[path] = table;
     } else {
       let empty = true;
 
@@ -43,26 +25,18 @@ const FlattenObjects = ({
         Object.entries(table).forEach(([property, item]) => {
           const prop = `${path}${splitKey}${property}`;
           empty = false;
-          if (Object(item) !== item) {
-            accumulator[prop] = item;
-          } else {
-            reduce(prop, accumulator, item as object);
-          }
+          if (Object(item) !== item) accumulator[prop] = item;
+          else reduce(prop, accumulator, item as object);
         });
       } else {
         Object.entries(table).forEach(([property, item]) => {
           empty = false;
-          if (Object(item) !== item) {
-            accumulator[property] = item;
-          } else {
-            reduce(property, accumulator, item as object);
-          }
+          if (Object(item) !== item) accumulator[property] = item;
+          else reduce(property, accumulator, item as object);
         });
       }
 
-      if (empty) {
-        accumulator[path] = table;
-      }
+      if (empty) accumulator[path] = table;
     }
 
     return accumulator;
@@ -70,7 +44,10 @@ const FlattenObjects = ({
   return reduce('', {}, table);
 };
 
-const UnFlatObjects = ({ json, keySplit = '_' }: UnFlatObjectsProps): Record<string, unknown> => {
+const UnFlatObjects = (
+  json: Record<string, unknown>,
+  keySplit: string = '_'
+): Record<string, unknown> => {
   const result: Record<string, unknown> = {};
   Object.entries(json).forEach(([key, value]) => {
     let current: Record<string, unknown> | unknown[] = result;
